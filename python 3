@@ -1,0 +1,13 @@
+import pandas 
+tp = pandas.read_csv(r"C:\Users\Edson\Downloads\clientes.csv", encoding="latin",sep=";")
+tp=tp.drop("Unnamed: 8",axis=1)
+display(tp)
+tp["Salário Anual (R$)"]=pandas.to_numeric(tp["Salário Anual (R$)"], errors ='coerce')
+tp=tp.dropna()
+print(tp.info())
+#display(tabela[tabela['Profissão']isna()])
+display(tp.describe())
+import plotly.express as px 
+for c in tp.columns :
+    grafico = px.histogram(tp,x=c,y="Nota (1-100)",histfunc='avg',text_auto='true')
+    grafico.show()
